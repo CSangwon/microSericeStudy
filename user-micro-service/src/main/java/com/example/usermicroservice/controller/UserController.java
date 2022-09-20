@@ -1,12 +1,12 @@
 package com.example.usermicroservice.controller;
 
-import com.example.usermicroservice.dto.UserDto;
 import com.example.usermicroservice.service.UserService;
 import com.example.usermicroservice.vo.Greeting;
 import com.example.usermicroservice.vo.RequestUser;
+import com.example.usermicroservice.vo.ResponseUser;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,10 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users")
-    public String createUser(@RequestBody RequestUser user) {
-        userService.createUser(user.toDto());
-
-        return "Create user method is called";
+    public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
+        return new ResponseEntity<>(userService.createUser(user.toDto()), HttpStatus.CREATED);
     }
 
     @GetMapping("/health_check")

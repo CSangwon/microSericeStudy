@@ -1,6 +1,7 @@
 package com.example.usermicroservice.dto;
 
 import com.example.usermicroservice.entity.UserEntity;
+import com.example.usermicroservice.vo.ResponseUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,14 @@ public class UserDto {
                 .email(email)
                 .name(name)
                 .encryptedPasswd(encryptedPasswd)
+                .build();
+    }
+
+    public ResponseUser toResponse(UserEntity userEntity){
+        return ResponseUser.builder()
+                .userId(String.valueOf(userEntity.getUserId()))
+                .email(userEntity.getEmail())
+                .name(userEntity.getName())
                 .build();
     }
 
