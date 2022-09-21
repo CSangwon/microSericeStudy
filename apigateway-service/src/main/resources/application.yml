@@ -21,6 +21,11 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+        - id: user-micro-service
+          uri: lb://USER-MICRO-SERVICE
+          predicates:
+            - Path=/user-micro-service/**
+
         - id: first-service
           uri: lb://MY-FIRST-SERVICE
           predicates:

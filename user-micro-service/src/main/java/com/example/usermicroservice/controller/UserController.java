@@ -5,12 +5,13 @@ import com.example.usermicroservice.vo.Greeting;
 import com.example.usermicroservice.vo.RequestUser;
 import com.example.usermicroservice.vo.ResponseUser;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-micro-service")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -22,9 +23,9 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(user.toDto()), HttpStatus.CREATED);
     }
 
-    @GetMapping("/health_check")
+    @GetMapping("/health-check")
     public String status() {
-        return "It's Working in User Service";
+        return "It's Working in User Service on Port " + greeting.getServerPort();
     }
 
     @GetMapping("/welcome")
