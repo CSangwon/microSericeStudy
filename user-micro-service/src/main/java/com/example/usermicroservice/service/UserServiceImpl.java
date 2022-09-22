@@ -6,9 +6,12 @@ import com.example.usermicroservice.repository.UserRepository;
 import com.example.usermicroservice.vo.ResponseUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,5 +30,19 @@ public class UserServiceImpl implements UserService{
 
         UserEntity createdUser = userRepository.save(userEntity);
         return userDto.toResponse(createdUser);
+    }
+
+    @Override
+    public ResponseUser getUserByUserId(UUID userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(
+                () -> new UsernameNotFoundException("User not Found")
+        );
+        UserDto userDto = new UserDto();
+        return userDto.toResponse(userEntity, new ArrayList<>());
+    }
+
+    @Override
+    public Iterable<UserEntity> getUserByAll() {
+        return userRepository.findAll();
     }
 }

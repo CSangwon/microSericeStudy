@@ -1,5 +1,7 @@
 package com.example.usermicroservice.controller;
 
+import com.example.usermicroservice.dto.UserDto;
+import com.example.usermicroservice.entity.UserEntity;
 import com.example.usermicroservice.service.UserService;
 import com.example.usermicroservice.vo.Greeting;
 import com.example.usermicroservice.vo.RequestUser;
@@ -9,6 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user-micro-service")
@@ -29,7 +35,27 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
-    public String welcome(){
+    public String welcome() {
         return greeting.getMessage();
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<ResponseUser>> getUsers(){
+        Iterable<UserEntity> userList = userService.getUserByAll();
+        List<ResponseUser> result = new ArrayList<>();
+
+        UserDto userDto = new UserDto();
+        userList.forEach(v -> {
+            result.add(userDto.toResponse(v, new ArrayList<>()));
+        });
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<ResponseUser> getUsers(@PathVariable("userId") UUID userId){
+        ResponseUser user = userService.getUserByUserId(userId);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

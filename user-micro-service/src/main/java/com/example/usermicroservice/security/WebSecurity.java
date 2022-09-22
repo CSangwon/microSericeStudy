@@ -24,7 +24,6 @@ public class WebSecurity{
 
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/users/**").permitAll();
-//        http.authorizeRequests().antMatchers("/user-micro-service/**").permitAll();
 
         http.headers().frameOptions().disable();
         return http.build();
