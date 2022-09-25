@@ -31,6 +31,11 @@ spring:
           predicates:
             - Path=/catalog-micro-service/**
 
+        - id: order-micro-service
+          uri: lb://ORDER-MICRO-SERVICE
+          predicates:
+            - Path=/order-micro-service/**
+
         - id: first-service
           uri: lb://MY-FIRST-SERVICE
           predicates:

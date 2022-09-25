@@ -26,7 +26,7 @@ public class ResponseCatalog {
 
     public ResponseCatalog toResponse(CatalogEntity catalogEntity) {
         return ResponseCatalog.builder()
-                .productId(catalogEntity.getProductId())
+                .productId(String.valueOf(catalogEntity.getProductId()))
                 .productName(catalogEntity.getProductName())
                 .unitPrice(catalogEntity.getUnitPrice())
                 .stock(catalogEntity.getStock())
