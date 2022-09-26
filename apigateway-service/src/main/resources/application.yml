@@ -24,8 +24,34 @@ spring:
         - id: user-micro-service
           uri: lb://USER-MICRO-SERVICE
           predicates:
-            - Path=/user-micro-service/**
+            - Path=/user-micro-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-micro-service/(?<segment>.*), /$\{segment}
 
+        - id: user-micro-service
+          uri: lb://USER-MICRO-SERVICE
+          predicates:
+            - Path=/user-micro-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-micro-service/(?<segment>.*), /$\{segment}
+
+        - id: user-micro-service
+          uri: lb://USER-MICRO-SERVICE
+          predicates:
+            - Path=/user-micro-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-micro-service/(?<segment>.*), /$\{segment}
+
+#        - id: user-micro-service
+#          uri: lb://USER-MICRO-SERVICE
+#          predicates:
+#            - Path=/user-micro-service/**
         - id: catalog-micro-service
           uri: lb://CATALOG-MICRO-SERVICE
           predicates:

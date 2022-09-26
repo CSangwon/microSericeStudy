@@ -3,6 +3,7 @@ package com.example.usermicroservice.service;
 import com.example.usermicroservice.dto.UserDto;
 import com.example.usermicroservice.entity.UserEntity;
 import com.example.usermicroservice.vo.ResponseUser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.UUID;
 

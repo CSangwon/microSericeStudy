@@ -6,6 +6,8 @@ import com.example.usermicroservice.repository.UserRepository;
 import com.example.usermicroservice.vo.ResponseUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,4 +47,5 @@ public class UserServiceImpl implements UserService{
     public Iterable<UserEntity> getUserByAll() {
         return userRepository.findAll();
     }
+
 }

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/user-micro-service")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<ResponseUser>> getUsers(){
+    public ResponseEntity<List<ResponseUser>> getUsers() {
         Iterable<UserEntity> userList = userService.getUserByAll();
         List<ResponseUser> result = new ArrayList<>();
 
@@ -53,8 +53,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<ResponseUser> getUsers(@PathVariable("userId") UUID userId){
+    public ResponseEntity<ResponseUser> getUsers(@PathVariable("userId") UUID userId) {
         return new ResponseEntity<>(userService.getUserByUserId(userId), HttpStatus.OK);
     }
+
 
 }
