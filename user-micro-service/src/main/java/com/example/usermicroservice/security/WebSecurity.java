@@ -12,13 +12,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +24,7 @@ import javax.servlet.Filter;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebSecurity{
 
-    private final UserDetailsServiceImpl userService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final Environment env;
 
     @Bean
@@ -57,11 +54,11 @@ public class WebSecurity{
 
     private AuthenticationManager getAuthenticationFilter(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
 
     private AuthenticationFilter getAuthenticationFilter(AuthenticationManager authenticationManager) {
-        return new AuthenticationFilter(authenticationManager, userService, env);
+        return new AuthenticationFilter(authenticationManager, userDetailsServiceImpl, env);
     }
 }

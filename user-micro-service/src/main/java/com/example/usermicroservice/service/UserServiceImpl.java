@@ -48,4 +48,17 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }
 
+//    @Override
+//    public UserDto getUserDetailsByEmail(String email) {
+//        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(
+//                () -> new UsernameNotFoundException(email));
+//        log.info("12321");
+//        log.info(userEntity.getEmail());
+//        return UserDto.builder().
+//                userId(String.valueOf(userEntity.getUserId()))
+//                .email(userEntity.getEmail())
+//                .name(userEntity.getName())
+//                .encryptedPasswd(userEntity.getEncryptedPasswd())
+//                .build();
+//    }
 }
