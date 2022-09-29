@@ -47,11 +47,8 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-micro-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 
-#        - id: user-micro-service
-#          uri: lb://USER-MICRO-SERVICE
-#          predicates:
-#            - Path=/user-micro-service/**
         - id: catalog-micro-service
           uri: lb://CATALOG-MICRO-SERVICE
           predicates:
@@ -83,3 +80,7 @@ spring:
                 baseMessage: Hi, there.
                 preLogger: true
                 postLogger: true
+
+
+token:
+  secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
