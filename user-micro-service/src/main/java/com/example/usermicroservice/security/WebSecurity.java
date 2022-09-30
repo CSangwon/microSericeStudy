@@ -34,9 +34,10 @@ public class WebSecurity{
         AuthenticationManager authenticationManager = getAuthenticationFilter(http);
 
         http.csrf().disable();
-//        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
-                .hasIpAddress("192.168.35.243")
+//                .hasIpAddress("192.168.35.243") // ifconfig | grep inet
+                .hasIpAddress("192.168.0.36")
                 .and()
                 .authenticationManager(authenticationManager)
                 .addFilter(getAuthenticationFilter(authenticationManager));

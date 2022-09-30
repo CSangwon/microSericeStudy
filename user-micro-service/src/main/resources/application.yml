@@ -35,6 +35,11 @@ logging:
   level:
     com.example.usermicroservice: DEBUG
 
-token:
-  expirationTime: 86400000
-  secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+#token:
+#  expirationTime: 86400000
+#  secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
