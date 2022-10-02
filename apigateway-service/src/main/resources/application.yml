@@ -42,6 +42,15 @@ spring:
         - id: user-micro-service
           uri: lb://USER-MICRO-SERVICE
           predicates:
+            - Path=/user-micro-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-micro-service/(?<segment>.*), /$\{segment}
+
+        - id: user-micro-service
+          uri: lb://USER-MICRO-SERVICE
+          predicates:
             - Path=/user-micro-service/**
             - Method=GET
           filters:
@@ -84,3 +93,9 @@ spring:
 
 token:
   secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
