@@ -17,11 +17,11 @@ spring:
       settings:
         web-allow-others: true
       path: /h2-console
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/msaTest1
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/msaTest1
+#    username: sa
+#    password: sa
   jpa:
     hibernate:
       ddl-auto: create-drop

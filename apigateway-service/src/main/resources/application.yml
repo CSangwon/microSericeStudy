@@ -95,8 +95,8 @@ spring:
                 postLogger: true
 
 
-token:
-  secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
+#token:
+#  secret: dbgkdus_tkfkdgo_dnfltkfkdduddnjsgkwk
 
 management:
   endpoints:

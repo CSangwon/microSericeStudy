@@ -3,5 +3,16 @@ spring:
     config:
       uri: http://127.0.0.1:8888
       name: ecommerce
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
+
+
+#  Private key 생성
+#  keytool -genkeypair -alias apiEncryptionKey -keyalg RSA -dname "CN=Sangwon, OU=API Development, O=joneconsulting.co.kr L=Seoul, C=KR" -keypass "1q2w3e4r" -keystore apiEncryptionKey.jks -storepass "1q2w3e4r"
+#  
+#  keytool -list -keystore apiEncryptionKey.jks -v
+#
+#  Public  key 추출
+#  keytool -export -alias apiEncryptionKey -keystore apiEncryptionKey.jks -rfc -file trustServer.cer
+#
+#  keytool -import -alias trustServer -file trustServer.cer -keystore publicKey.jks
