@@ -61,11 +61,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             returnValue = false;
         }
 
-
-
-
-
-
         return returnValue;
     }
 
