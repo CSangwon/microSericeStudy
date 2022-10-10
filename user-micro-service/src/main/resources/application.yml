@@ -40,7 +40,8 @@ greeting:
 
 logging:
   level:
-    com.example.usermicroservice: DEBUG
+#    com.example.usermicroservice: DEBUG
+    com.example.usermicroservice.client: DEBUG
 
 management:
   endpoints:

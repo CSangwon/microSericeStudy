@@ -9,7 +9,7 @@ spring:
 
 #  Private key 생성
 #  keytool -genkeypair -alias apiEncryptionKey -keyalg RSA -dname "CN=Sangwon, OU=API Development, O=joneconsulting.co.kr L=Seoul, C=KR" -keypass "1q2w3e4r" -keystore apiEncryptionKey.jks -storepass "1q2w3e4r"
-#  
+#
 #  keytool -list -keystore apiEncryptionKey.jks -v
 #
 #  Public  key 추출

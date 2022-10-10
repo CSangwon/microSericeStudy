@@ -11,11 +11,15 @@ spring:
       settings:
         web-allow-others: true
       path: /h2-console
+
   datasource:
-    url: jdbc:h2:tcp://localhost/~/msaTest3
-    username: sa
-    password: sa
     driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/msaTest3
+#    username: sa
+#    password: sa
+#    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: update

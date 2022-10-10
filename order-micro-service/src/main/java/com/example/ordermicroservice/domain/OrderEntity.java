@@ -26,7 +26,7 @@ public class OrderEntity implements Serializable {
     @Column(columnDefinition = "BINARY(16)")
     private UUID orderId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String productId;
 
     @Column(nullable = false, columnDefinition = "BINARY(16)")
