@@ -2,6 +2,7 @@ package com.example.ordermicroservice.controller;
 
 import com.example.ordermicroservice.domain.OrderEntity;
 import com.example.ordermicroservice.dto.OrderDto;
+import com.example.ordermicroservice.messagequeue.KafkaProducer;
 import com.example.ordermicroservice.service.OrderService;
 import com.example.ordermicroservice.vo.Greeting;
 import com.example.ordermicroservice.vo.RequestOrder;
@@ -24,6 +25,8 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    private final KafkaProducer kafkaProducer;
+
     @GetMapping("/health-check")
     public String status() {
         return "It's Working in User Service on Port " + greeting.getServerPort();
@@ -31,7 +34,14 @@ public class OrderController {
 
     @PostMapping("/{userId}/orders")
     public ResponseEntity<ResponseOrder> createOrder(@RequestBody RequestOrder requestOrder, @PathVariable String userId) {
-        return new ResponseEntity<>(orderService.createOrder(requestOrder.toDto(userId)), HttpStatus.OK);
+
+        OrderDto orderDto = requestOrder.toDto(userId);
+        ResponseOrder createOrder = orderService.createOrder(orderDto);
+
+        /*send this order to the kafka*/
+        kafkaProducer.send("example-catalog-topic", orderDto);
+
+        return new ResponseEntity<>(createOrder, HttpStatus.CREATED);
     }
 
     @GetMapping("/{orderId}")

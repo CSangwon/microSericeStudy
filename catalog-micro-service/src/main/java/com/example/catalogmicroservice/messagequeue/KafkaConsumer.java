@@ -24,7 +24,7 @@ public class KafkaConsumer {
     public void updateQty(String kafkaMessage) {
         log.info("Kafka message : ", kafkaMessage);
 
-        Map<Object, Object> map = new HashMap<>();
+        Map<Object, Object> map = new HashMap<>(); // 직렬화 한 값을 여기서 역직렬화 해줘서 사용
         ObjectMapper mapper = new ObjectMapper();
         try {
             map = mapper.readValue(kafkaMessage, new TypeReference<Map<Object, Object>>() {
